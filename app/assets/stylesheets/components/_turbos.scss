@@ -1,5 +1,6 @@
 .background{
   width: 100%;
+  min-height: 100vh;
   background: #43C6AC;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to bottom, #191654, #43C6AC);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to bottom, #191654, #43C6AC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -10,8 +11,24 @@
 
 .wrapper{
   width: 80%;
-  min-height: 50%;
+  min-height: 50vh;
   max-width: 500px;
   border: solid 4px white;
   border-radius: 8px;
+  color: white;
+  padding: 24px;
+  position: relative;
 }
+
+.wrapper a {
+  position: absolute;
+  background-color: #EB5E55;
+  border-radius: 50%;
+  top: 16px;
+  right: 16px;
+  padding: 16px;
+  border: none;
+  color: #FDF0D5;
+
+}
+#title-wrapper {margin: 48px 0px 24px 0px;}

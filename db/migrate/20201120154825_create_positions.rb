@@ -4,6 +4,8 @@ class CreatePositions < ActiveRecord::Migration[6.0]
       t.string :emetteur
       t.string :isin
       t.integer :quantity
+      t.float :price
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end
