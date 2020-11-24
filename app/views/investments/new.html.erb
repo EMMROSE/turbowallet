@@ -1,0 +1,28 @@
+
+<div class="background">
+  <div class="wrapper">
+    <h3 id="title-wrapper">Créer une nouvelle position</h3>
+    <div class="">
+      <% investment = Investment.new %>
+      <%= simple_form_for(investment) do |f| %>
+        <div class="">
+          <%= f.input :name, label: 'Nom du sous-jacent', placeholder: "exemple : Tesla, Apple, CAC40..." %>
+          <%= f.input :isin, label: 'Code ISIN', placeholder: "exemple : DE000SB587A4" %>
+          <%= f.input :emetteur, label: 'Emetteur du produit', collection: ["SG", "BNP", "CITI"] %>
+          <div style="display:flex; justify-content: space-between; margin-bottom: 6px;">
+            <%= f.label "Prix de revient unique en €" %>
+            <%= f.number_field :price%>
+          </div>
+          <div style="display:flex; justify-content: space-between; margin-bottom: 6px;">
+            <%= f.label "Quantité achetée" %>
+            <%= f.number_field :quantity%>
+          </div>
+         </div>
+         <div class="form-button" style="display:flex; justify-content: space-between;">
+          <%= f.submit "Créer la position", class: 'button' %>
+          <%= f.submit "Créer une autre position", class: 'button' %>
+         </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,32 @@
 <div class="background">
   <div class="wrapper">
-    <%= link_to new_position_path do%>
+    <%= link_to new_investment_path do%>
       <i class="fas fa-plus"></i>
     <% end %>
     <h3 id="title-wrapper">Votre Portefeuille Titres</h3>
-    <% if @positions.present? %>
-
+    <% if @investments.present? %>
+    <table class="table">
+      <tr>
+        <td>Ss-jacent</td>
+        <td>Isin</td>
+        <td>Emetteur</td>
+        <td>PRU</td>
+        <td>Qté</td>
+        <td>Cours</td>
+        <td>+/- value</td>
+      </tr>
+      <tr>
+        <% @investments.each do |investment| %>
+          <td><%= investment.name %></td>
+          <td><%= investment.isin %></td>
+          <td><%= investment.emetteur %></td>
+          <td><%= investment.price %></td>
+          <td><%= investment.quantity %></td>
+          <td><%= investment.value %></td>
+          <td>Gain à calculer</td>
+        <% end %>
+      </tr>
+    </table>
     <% else %>
       <p>Votre portefeuille est actuellement vide.</p>
     <% end %>
