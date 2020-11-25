@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_11_23_201308) do
     t.string "name"
     t.integer "quantity"
     t.float "price"
-    t.float "value"
+    t.float "value", default: 0.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

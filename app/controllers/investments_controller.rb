@@ -1,4 +1,9 @@
 class InvestmentsController < ApplicationController
+
+  require 'open-uri'
+  require 'nokogiri'
+
+
   def new
     @investment = Investment.new
   end
@@ -16,6 +21,42 @@ class InvestmentsController < ApplicationController
       render :new
       flash[:alert] = "Veuillez compléter le formulaire s'il vous plaît."
     end
+  end
+
+  def parsing
+    require 'open-uri'
+    require 'nokogiri'
+
+    @investments = Investment.all
+    @investments.each do |investment|
+      # if investment.emetteur == "SG"
+        url = "https://live.euronext.com/en/product/structured-products/DE000SD09RZ3-XMLI"
+        html_file = open(url).read
+        html_doc = Nokogiri::HTML(html_file)
+        result = html_doc.search("div.date-header span.data-60").text
+        investment.value = result.to_f
+        raise
+        investment.save
+      # elsif investment.emetteur == "BNP"
+      #   url = "https://bourse.societegenerale.fr/retail/Products-ProductSearcgQuick/q-#{investment.isin}"
+      #   html_file = open(url).read
+      #   html_doc = Nokogiri::HTML(html_file)
+      #   result = html_doc.search('.productPriceBid .hidePush').text.strip
+      #   result = result.gsub(",", ".")
+      #   investment.value = result.to_f
+      #   investment.save
+      # else
+      #   url = "https://fr.citifirst.com/FR/Produits/Turbos/#{investment.name}/#{investment.isin}/"
+      #   html_file = open(url).read
+      #   html_doc = Nokogiri::HTML(html_file)
+      #   result = html_doc.search('.Ask .Value').span.to_s
+      #   raise
+      #   result = result.gsub(",", ".")
+      #   investment.value = result.to_f
+      #   investment.save
+      # end
+    end
+    redirect_to root_path
   end
 
   # def edit
@@ -74,4 +115,5 @@ class InvestmentsController < ApplicationController
   def investment_params
     params.require(:investment).permit(:name, :isin, :emetteur, :quantity, :price)
   end
+
 end

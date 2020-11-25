@@ -1,6 +1,9 @@
 <div class="background">
   <div class="wrapper">
-    <%= link_to new_investment_path do%>
+    <%= link_to parsing_path, method: :post, id:"icon_refresh" do%>
+      <i class="fas fa-sync-alt"></i>
+    <% end %>
+    <%= link_to new_investment_path, id:"icon_plus" do%>
       <i class="fas fa-plus"></i>
     <% end %>
     <h3 id="title-wrapper">Votre Portefeuille Titres</h3>
@@ -15,17 +18,21 @@
         <td>Cours</td>
         <td>+/- value</td>
       </tr>
-      <tr>
-        <% @investments.each do |investment| %>
-          <td><%= investment.name %></td>
-          <td><%= investment.isin %></td>
-          <td><%= investment.emetteur %></td>
-          <td><%= investment.price %></td>
-          <td><%= investment.quantity %></td>
-          <td><%= investment.value %></td>
-          <td>Gain à calculer</td>
-        <% end %>
-      </tr>
+      <% @investments.each do |investment| %>
+        <tr>
+            <td><%= investment.name %></td>
+            <td><%= investment.isin %></td>
+            <td><%= investment.emetteur %></td>
+            <td><%= investment.price %>€</td>
+            <td><%= investment.quantity %></td>
+            <td><%= investment.value %>€</td>
+            <% if investment.gain(investment) >= 0 %>
+              <td id="positive-value"><p><%= investment.gain(investment) %>€</p></td>
+            <% else %>
+              <td id="negative-value"><p><%= investment.gain(investment) %>€</p></td>
+            <% end %>
+        </tr>
+      <% end %>
     </table>
     <% else %>
       <p>Votre portefeuille est actuellement vide.</p>

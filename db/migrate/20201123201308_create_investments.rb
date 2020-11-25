@@ -6,7 +6,7 @@ class CreateInvestments < ActiveRecord::Migration[6.0]
       t.string :name
       t.integer :quantity
       t.float :price
-      t.float :value
+      t.float :value, default: 0.00
 
       t.timestamps
     end
